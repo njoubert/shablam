@@ -1,15 +1,19 @@
+TARGET = shablam
+SOURCES = $(wildcard ./src/*.cpp)
 
-TARGET := shablam
+CXX = g++
 
-INCLUDE := -I/opt/local/include
-LIB := -lmad
-LIBDIRS := -L/opt/local/lib
+INCLUDE = -I/opt/local/include
+LIB = -lmad
+LIBDIRS = -L/opt/local/lib
 
-all: main.o
-	g++ $(LIBDIRS) $(LIB) -o $(TARGET) main.o
+%.o : %.cpp
+	$(CXX) -c -Wall $(INCLUDE) $< -o $@
 
-main.o: main.cpp
-	g++ $(INCLUDE) -o main.o -c main.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+
+all: $(SOURCES) $(OBJECTS)
+	$(CXX) $(LIBDIRS) $(LIB) -o $(TARGET) $(OBJECTS)
 
 clean:
 	rm -rf *.o $(TARGET)
