@@ -5,11 +5,15 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+#include <vector>
 
 struct mad_buffer {
   unsigned char const *s;
   unsigned long len;
 };
+
+typedef mad_fixed_t sample;
+static std::vector<sample> audio;
 
 /* 
 	callback function for populating MAD decoder with data. 
@@ -47,14 +51,15 @@ static enum mad_flow output(void *data, struct mad_header const *header, struct 
     /* output sample(s) in 16-bit signed little-endian PCM */
   
     sample = (*left_ch++);
-    putchar((sample >> 0) & 0xff);
-    putchar((sample >> 8) & 0xff);
+	audio.push_back(sample);
+    // putchar((sample >> 0) & 0xff);
+    // putchar((sample >> 8) & 0xff);
   
-    if (nchannels == 2) {
-      sample = (*right_ch++);
-      putchar((sample >> 0) & 0xff);
-      putchar((sample >> 8) & 0xff);
-    }
+    // if (nchannels == 2) {
+    //   sample = (*right_ch++);
+    //   putchar((sample >> 0) & 0xff);
+    //   putchar((sample >> 8) & 0xff);
+    // }
   }
 
   return MAD_FLOW_CONTINUE;
@@ -126,6 +131,8 @@ int optDecode(int argc, char **argv) {
 	}
 		
 	decode((unsigned char*)fdm, stat.st_size);
+	
+	printf("Size of audio buffer: %d", audio.size());
 
 	if (munmap(fdm, stat.st_size) == -1) {
 		printf("Could not unmap file's memory.\n");

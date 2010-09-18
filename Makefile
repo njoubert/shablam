@@ -1,5 +1,6 @@
 TARGET = shablam
 SOURCES = $(wildcard ./src/*.cpp)
+HEADERS = $(wildcard ./src/*.h)
 
 CXX = g++
 
@@ -12,7 +13,7 @@ LIBDIRS = -L/opt/local/lib
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
-all: $(SOURCES) $(OBJECTS)
+all: $(HEADERS) $(SOURCES) $(OBJECTS)
 	$(CXX) $(LIBDIRS) $(LIB) -o $(TARGET) $(OBJECTS)
 
 clean:
