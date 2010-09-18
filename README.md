@@ -5,29 +5,34 @@ Written on OS X 10.6.4
 Assumes macports, with installed ports:
 
 *   libmad
+*   sqlite (?) somewhere to store lots of hashing data.
+*   freeimage (?) cause i wanna draw spectrums.
 
 ## GOAL
 
 Build a duplicate detection system for your library that doesn't suck like itunes.
 
-## LICENSE
+As for code style... STFU and hack it. A weird combination of C and C++. 
+Hey maybe i'll throw some templates in there just to confuse stuff.
+One day will be refactoring day, but that day is still far off.
 
-> Copyright (c) 2010 Niels Joubert
-> 
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
-> 
-> The above copyright notice and this permission notice shall be included in
-> all copies or substantial portions of the Software.
-> 
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-> THE SOFTWARE.
+## RESOURCES
+
+The origins of this project is inspired by two blog posts:
+
+* http://laplacian.wordpress.com/2009/01/10/how-shazam-works/
+* http://www.redcode.nl/blog/2010/06/creating-shazam-in-java/
+
+The blog posts were inspired by the original paper:
+
+* "An Industrial-Strength Audio Search Algorithm", A. Wang, Shazam Entertainment
+
+Using MAD:
+
+* http://www.underbit.com/products/mad/
+* http://www.mars.org/pipermail/mad-dev/2001-October/000369.html
+
+Useful GIT stuff:
+
+* http://gitref.org/
+* http://stackoverflow.com/questions/1184518/getting-existing-git-branches-to-track-remote-branches
