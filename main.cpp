@@ -31,31 +31,31 @@ enum mad_flow input(void *data, struct mad_stream *stream) {
 */
 enum mad_flow output(void *data, struct mad_header const *header, struct mad_pcm *pcm) {
 	
-  unsigned int nchannels, nsamples;
-  mad_fixed_t const *left_ch, *right_ch;
-
-  /* pcm->samplerate contains the sampling frequency */
-
-  nchannels = pcm->channels;
-  nsamples  = pcm->length;
-  left_ch   = pcm->samples[0];
-  right_ch  = pcm->samples[1];
-
-  while (nsamples--) {
-    signed int sample;
-
-    /* output sample(s) in 16-bit signed little-endian PCM */
-
-    //sample = scale(*left_ch++);
-    putchar((sample >> 0) & 0xff);
-    putchar((sample >> 8) & 0xff);
-
-    if (nchannels == 2) {
-      //sample = scale(*right_ch++);
-      putchar((sample >> 0) & 0xff);
-      putchar((sample >> 8) & 0xff);
-    }
-  }
+  // unsigned int nchannels, nsamples;
+  // mad_fixed_t const *left_ch, *right_ch;
+  // 
+  // /* pcm->samplerate contains the sampling frequency */
+  // 
+  // nchannels = pcm->channels;
+  // nsamples  = pcm->length;
+  // left_ch   = pcm->samples[0];
+  // right_ch  = pcm->samples[1];
+  // 
+  // while (nsamples--) {
+  //   signed int sample;
+  // 
+  //   /* output sample(s) in 16-bit signed little-endian PCM */
+  // 
+  //   //sample = scale(*left_ch++);
+  //   putchar((sample >> 0) & 0xff);
+  //   putchar((sample >> 8) & 0xff);
+  // 
+  //   if (nchannels == 2) {
+  //     //sample = scale(*right_ch++);
+  //     putchar((sample >> 0) & 0xff);
+  //     putchar((sample >> 8) & 0xff);
+  //   }
+  // }
 
   return MAD_FLOW_CONTINUE;
 }
@@ -91,7 +91,11 @@ int decode(unsigned char const *start, unsigned long length) {
 		0 /* message */
 	);
 	
-	result = mad_decoder_run(&decoder, MAD_DECODER_MODE_SYNC);
+	for (unsigned int i = 0; i  < length-4; i += 4) {
+		printf("%x\n", *((unsigned int *) (start + i)));
+	}
+	
+	//result = mad_decoder_run(&decoder, MAD_DECODER_MODE_SYNC);
 	
 	mad_decoder_finish(&decoder);
 	
@@ -114,16 +118,15 @@ int optDecode(int argc, char **argv) {
 	}
 	
 	printf("Processing %s... [%ld bytes]\n", inputFile, (long) stat.st_size);
-	
-	decode((unsigned char*)fdm, stat.st_size);
-	
+		
 	fdm = mmap(0, stat.st_size, PROT_READ, MAP_SHARED, fileno(fi), 0);
 	if (fdm == MAP_FAILED) {
 		printf("Could not map file to memory.\n");
 		return 3;
 	}
-	
-	
+		
+	decode((unsigned char*)fdm, stat.st_size);
+
 	if (munmap(fdm, stat.st_size) == -1) {
 		printf("Could not unmap file's memory.\n");
 		return 4;
