@@ -2,3 +2,5 @@ lib/
 hi.mp3
 shablam
 *.o
+*.mp3
+*.wav
