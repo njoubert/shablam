@@ -6,6 +6,17 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
+struct mad_buffer {
+  unsigned char const *s;
+  unsigned long len;
+};
+
+int decode(unsigned char const *start, unsigned long length) {
+	mad_buffer buf;
+	
+	buf.s = start;
+	buf.len = length;
+}
 
 int optDecode(int argc, char **argv) {
 	if (argc != 3) {
@@ -23,6 +34,8 @@ int optDecode(int argc, char **argv) {
 	}
 	
 	printf("Processing %s... [%ld bytes]\n", inputFile, (long) stat.st_size);
+	
+	decode((unsigned char*)fdm, stat.st_size);
 	
 	fdm = mmap(0, stat.st_size, PROT_READ, MAP_SHARED, fileno(fi), 0);
 	if (fdm == MAP_FAILED) {
