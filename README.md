@@ -20,8 +20,8 @@ One day will be refactoring day, but that day is still far off.
 
 The origins of this project is inspired by two blog posts:
 
-* http://laplacian.wordpress.com/2009/01/10/how-shazam-works/
-* http://www.redcode.nl/blog/2010/06/creating-shazam-in-java/
+* [How Shazam Works](http://laplacian.wordpress.com/2009/01/10/how-shazam-works/)
+* [Recreating Shazam in Java](http://www.redcode.nl/blog/2010/06/creating-shazam-in-java/)
 
 The blog posts were inspired by the original paper:
 
@@ -29,10 +29,10 @@ The blog posts were inspired by the original paper:
 
 Using MAD:
 
-* http://www.underbit.com/products/mad/
-* http://www.mars.org/pipermail/mad-dev/2001-October/000369.html
+* [libmad homepage](http://www.underbit.com/products/mad/)
+* [using libmad](http://www.mars.org/pipermail/mad-dev/2001-October/000369.html)
 
 Useful GIT stuff:
 
-* http://gitref.org/
-* http://stackoverflow.com/questions/1184518/getting-existing-git-branches-to-track-remote-branches
+* [gitref](http://gitref.org/)
+* [getting existing git branches to track remote branches](http://stackoverflow.com/questions/1184518/getting-existing-git-branches-to-track-remote-branches)
